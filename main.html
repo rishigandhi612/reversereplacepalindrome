@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String Operations</title>
+</head>
+<body>
+    <input type="text" id="inputString" placeholder="Enter a string">
+    <select id="operation">
+        <option value="reverse">Reverse String</option>
+        <option value="replace">Replace Characters</option>
+        <option value="palindrome">Check Palindrome</option>
+    </select>
+    <button onclick="performOperation()">Perform Operation</button>
+    <p id="output"></p>
+
+    <script>
+        function reverseString(str) {
+            return str.split('').reverse().join('');
+        }
+
+        function replaceCharacters(str, charToReplace, replacementChar) {
+            return str.split(charToReplace).join(replacementChar);
+        }
+
+        function isPalindrome(str) {
+            const cleanedStr = str.toLowerCase().replace(/\s/g, ''); // Remove spaces and convert to lowercase
+            const len = cleanedStr.length;
+
+            for (let i = 0; i < len / 2; i++) {
+                if (cleanedStr[i] !== cleanedStr[len - 1 - i]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        function performOperation() {
+            const input = document.getElementById('inputString').value;
+            const operation = document.getElementById('operation').value;
+            let result = '';
+
+            switch (operation) {
+                case 'reverse':
+                    result = reverseString(input);
+                    break;
+                case 'replace':
+                    result = replaceCharacters(input, 'hello', 'hey');
+                    break;
+                case 'palindrome':
+                    result = isPalindrome(input) ? 'Palindrome' : 'Not Palindrome';
+                    break;
+                default:
+                    result = 'Invalid operation.';
+            }
+
+            document.getElementById('output').textContent = result;
+        }
+    </script>
+</body>
+</html>
